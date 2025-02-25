@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: templatemicroservice
+    name: review-service
 
   datasource:
     url: jdbc:h2:mem:testdb
@@ -16,8 +16,8 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
     database-platform: org.hibernate.dialect.H2Dialect
 
   liquibase:
-    enabled: false
+    enabled: true
