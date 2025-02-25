@@ -1,13 +1,11 @@
-package com.jmp.template;
+package com.jmp.reviewservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TemplateApplication {
-
+public class ReviewServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(TemplateApplication.class, args);
+        SpringApplication.run(ReviewServiceApplication.class, args);
     }
-
 }

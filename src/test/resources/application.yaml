@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: templatemicroservice
+    name: review-service
 
   datasource:
     url: jdbc:h2:mem:testdb
