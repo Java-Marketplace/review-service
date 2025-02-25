@@ -66,16 +66,6 @@ tasks.jacocoTestReport {
         html.required = true
         csv.required = false
     }
-
-    classDirectories.setFrom(files(classDirectories.files.map {
-        fileTree(it) {
-            include(
-                "**/service/**",
-                "**/controller/**",
-                "**/repository/**"
-            )
-        }
-    }))
 }
 
 tasks.test {
