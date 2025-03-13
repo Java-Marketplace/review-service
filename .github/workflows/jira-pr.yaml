@@ -6,6 +6,9 @@ on:
 
 jobs:
   jira-pr:
+    permissions:
+      pull-requests: write
+      contents: read
     if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
