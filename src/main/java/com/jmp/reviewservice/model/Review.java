@@ -12,6 +12,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -43,17 +45,17 @@ public class Review {
 
     @Column(length = 2000)
     @Size(min = 5, max = 2000)
-    private String disadvantages;
+    private String disadvantage;
 
     @Column(length = 2000)
-    @Size(min = 5, max = 2000)
+    @Size(min = 5, max = 2000, message = "Хуйня переделывай")
     private String comment;
 
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ReviewMessage> answers;
+    private List<ReviewMessage> answers = new ArrayList<>();
 
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ReviewVote> votes;
+    private Set<ReviewVote> votes = new HashSet<>();
 
     @Transient
     private Long likeCount;
@@ -71,13 +73,13 @@ public class Review {
 
     public Long getLikeCount() {
         return votes.stream()
-                .filter(v -> v.getVoteType() == VoteType.LIKE)
-                .count();
+            .filter(v -> v.getVoteType() == VoteType.LIKE)
+            .count();
     }
 
     public Long getDislikeCount() {
         return votes.stream()
-                .filter(v -> v.getVoteType() == VoteType.DISLIKE)
-                .count();
+            .filter(v -> v.getVoteType() == VoteType.DISLIKE)
+            .count();
     }
 }

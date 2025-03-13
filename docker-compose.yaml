@@ -1,7 +1,7 @@
 services:
   postgresql:
     image: postgres:latest
-    container_name: tasks-microservice_database
+    container_name: review-microservice_database
     env_file:
       - .env
     environment:

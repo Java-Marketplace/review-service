@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 1740602075488-1
+      id: 1740952099759-1
       author: aqua (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -33,7 +33,7 @@ databaseChangeLog:
                   name: advantage
                   type: VARCHAR(2000)
               - column:
-                  name: disadvantages
+                  name: disadvantage
                   type: VARCHAR(2000)
               - column:
                   name: comment
@@ -50,7 +50,7 @@ databaseChangeLog:
                   type: DATETIME
             tableName: review
   - changeSet:
-      id: 1740602075488-2
+      id: 1740952099759-2
       author: aqua (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -87,7 +87,7 @@ databaseChangeLog:
                   type: DATETIME
             tableName: review_message
   - changeSet:
-      id: 1740602075488-3
+      id: 1740952099759-3
       author: aqua (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -119,7 +119,7 @@ databaseChangeLog:
                   type: DATETIME
             tableName: review_vote
   - changeSet:
-      id: 1740602075488-4
+      id: 1740952099759-4
       author: aqua (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -130,7 +130,7 @@ databaseChangeLog:
             referencedColumnNames: id
             referencedTableName: review
   - changeSet:
-      id: 1740602075488-5
+      id: 1740952099759-5
       author: aqua (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:

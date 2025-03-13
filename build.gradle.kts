@@ -16,7 +16,12 @@ java {
 }
 
 jacoco {
-    toolVersion = "0.8.11"
+    toolVersion = "0.8.12"
+}
+
+checkstyle {
+    toolVersion = "10.21.2"
+    configFile = file("checkstyle.xml")
 }
 
 configurations {
@@ -41,7 +46,10 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
     annotationProcessor("org.mapstruct:mapstruct-processor:${property("mapstruct.version")}")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("com.h2database:h2")
+    testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("org.springframework.boot:spring-boot-testcontainers")
+    testImplementation("org.testcontainers:postgresql")
+    testImplementation("com.github.database-rider:rider-spring:${property("database-rider.version")}")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
@@ -50,7 +58,7 @@ tasks.withType<Test> {
 }
 
 tasks.withType<Checkstyle> {
-    configFile = rootProject.file("checkstyle.xml")
+    configProperties = mapOf("charset" to "UTF-8")
     maxWarnings = 5
     isShowViolations = true
 }
