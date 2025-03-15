@@ -52,7 +52,7 @@ jobs:
         run: ./gradlew jacocoTestReport --no-daemon
 
       - name: Build Docker Image with Jib
-        run: ./gradlew jib --no-daemon -PGITHUB_USERNAME=java-marketplace -PGITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+        run: ./gradlew jib --no-daemon -PGITHUB_ACTOR=java-marketplace -PGITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload Build Artifact
         if: always()
