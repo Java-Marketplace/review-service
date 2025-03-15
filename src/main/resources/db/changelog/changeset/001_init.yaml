@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 1741973756003-1
+      id: 1742074241791-1
       author: aqua (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -39,6 +39,12 @@ databaseChangeLog:
                   name: comment
                   type: VARCHAR(2000)
               - column:
+                  name: like_count
+                  type: BIGINT
+              - column:
+                  name: dislike_count
+                  type: BIGINT
+              - column:
                   constraints:
                     nullable: false
                   name: created_at
@@ -50,7 +56,7 @@ databaseChangeLog:
                   type: DATETIME
             tableName: review
   - changeSet:
-      id: 1741973756003-2
+      id: 1742074241791-2
       author: aqua (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -87,7 +93,7 @@ databaseChangeLog:
                   type: DATETIME
             tableName: review_message
   - changeSet:
-      id: 1741973756003-3
+      id: 1742074241791-3
       author: aqua (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -119,7 +125,7 @@ databaseChangeLog:
                   type: DATETIME
             tableName: review_vote
   - changeSet:
-      id: 1741973756003-4
+      id: 1742074241791-4
       author: aqua (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -130,7 +136,7 @@ databaseChangeLog:
             referencedColumnNames: id
             referencedTableName: review
   - changeSet:
-      id: 1741973756003-5
+      id: 1742074241791-5
       author: aqua (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:

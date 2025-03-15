@@ -45,8 +45,6 @@ class ReviewMapperTest extends BaseIntegrationTest {
         assertNull(review.getDislikeCount());
         assertNotNull(review.getAnswers());
         assertTrue(review.getAnswers().isEmpty());
-        assertNotNull(review.getVotes());
-        assertTrue(review.getVotes().isEmpty());
         assertNull(review.getCreatedAt());
         assertNull(review.getUpdatedAt());
     }
