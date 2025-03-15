@@ -29,7 +29,7 @@ public class ReviewMessage {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "review_id", nullable = false)
-    @JsonBackReference
+    @JsonBackReference("reviewMessages")
     private Review review;
 
     @NotBlank

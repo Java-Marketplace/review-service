@@ -62,11 +62,11 @@ public class Review {
     private String comment;
 
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference("reviewMessages")
     private List<ReviewMessage> answers = new ArrayList<>();
 
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference("reviewVotes")
     private Set<ReviewVote> votes = new HashSet<>();
 
     @Formula("(SELECT COUNT(*) FROM review_vote rv WHERE rv.review_id = id AND rv.vote_type = 'LIKE')")

@@ -32,7 +32,7 @@ public class ReviewVote {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "review_id", nullable = false)
-    @JsonBackReference
+    @JsonBackReference("reviewVotes")
     private Review review;
 
     @Enumerated(EnumType.STRING)
