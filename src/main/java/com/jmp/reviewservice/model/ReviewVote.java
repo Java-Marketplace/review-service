@@ -1,5 +1,6 @@
 package com.jmp.reviewservice.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -31,6 +32,7 @@ public class ReviewVote {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "review_id", nullable = false)
+    @JsonBackReference
     private Review review;
 
     @Enumerated(EnumType.STRING)
