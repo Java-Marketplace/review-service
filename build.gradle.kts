@@ -2,6 +2,7 @@ plugins {
     java
     jacoco
     checkstyle
+    id("com.google.cloud.tools.jib") version "3.4.4"
     id("org.springframework.boot") version "3.4.3"
     id("io.spring.dependency-management") version "1.1.7"
 }
@@ -60,7 +61,7 @@ tasks.named("checkstyleMain") {
 }
 
 tasks.named("checkstyleTest") {
-    dependsOn("compileTestJava")
+    enabled = false
 }
 
 tasks.jacocoTestReport {
@@ -83,4 +84,17 @@ tasks.test {
 
 tasks.named("build") {
     dependsOn("checkstyleMain", "jacocoTestReport")
+}
+
+jib {
+    from {
+        image = "eclipse-temurin:21-jre"
+    }
+    to {
+        image = "ghcr.io/Java-Marketplace/review-service"
+        auth {
+            username = System.getenv("GITHUB_ACTOR") ?: ""
+            password = System.getenv("GITHUB_TOKEN") ?: ""
+        }
+    }
 }

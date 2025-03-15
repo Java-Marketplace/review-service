@@ -1,6 +1,7 @@
 name: CI Pipeline
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
@@ -45,6 +46,9 @@ jobs:
 
       - name: Generate JaCoCo Report
         run: ./gradlew jacocoTestReport --no-daemon
+
+      - name: Build Docker Image with Jib
+        run: ./gradlew jib --no-daemon -PGITHUB_USERNAME=${{ secrets.GITHUB_USERNAME }} -PGITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload Build Artifact
         if: always()
