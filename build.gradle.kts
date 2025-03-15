@@ -91,7 +91,7 @@ jib {
         image = "eclipse-temurin:21-jre"
     }
     to {
-        image = "ghcr.io/Java-Marketplace/review-service"
+        image = "ghcr.io/java-marketplace/review-service"
         auth {
             username = System.getenv("GITHUB_ACTOR") ?: ""
             password = System.getenv("GITHUB_TOKEN") ?: ""
