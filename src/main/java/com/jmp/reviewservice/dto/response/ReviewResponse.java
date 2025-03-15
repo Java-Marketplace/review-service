@@ -1,4 +1,4 @@
-package com.jmp.reviewservice.dto.review;
+package com.jmp.reviewservice.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

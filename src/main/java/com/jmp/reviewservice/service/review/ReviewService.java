@@ -1,8 +1,8 @@
 package com.jmp.reviewservice.service.review;
 
-import com.jmp.reviewservice.dto.review.CreateReviewRequest;
-import com.jmp.reviewservice.dto.review.ReviewResponse;
-import com.jmp.reviewservice.dto.review.UpdateReviewRequest;
+import com.jmp.reviewservice.dto.request.CreateReviewRequest;
+import com.jmp.reviewservice.dto.response.ReviewResponse;
+import com.jmp.reviewservice.dto.request.UpdateReviewRequest;
 
 import java.util.List;
 import java.util.UUID;

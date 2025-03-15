@@ -1,8 +1,8 @@
 package com.jmp.reviewservice.mapper;
 
-import com.jmp.reviewservice.dto.review.CreateReviewRequest;
-import com.jmp.reviewservice.dto.review.ReviewResponse;
-import com.jmp.reviewservice.dto.review.UpdateReviewRequest;
+import com.jmp.reviewservice.dto.request.CreateReviewRequest;
+import com.jmp.reviewservice.dto.response.ReviewResponse;
+import com.jmp.reviewservice.dto.request.UpdateReviewRequest;
 import com.jmp.reviewservice.model.Review;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -23,8 +23,8 @@ public interface ReviewMapper {
     @Mapping(target = "updatedAt", ignore = true)
     Review toEntity(CreateReviewRequest request);
 
-    @Mapping(target = "likeCount", source = "likeCount")
-    @Mapping(target = "dislikeCount", source = "dislikeCount")
+    @Mapping(target = "likeCount", expression = "java(review.getLikeCount())")
+    @Mapping(target = "dislikeCount", expression = "java(review.getDislikeCount())")
     ReviewResponse toResponse(Review review);
 
     List<ReviewResponse> toResponseList(List<Review> reviews);

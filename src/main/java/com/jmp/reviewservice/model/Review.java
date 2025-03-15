@@ -1,6 +1,14 @@
 package com.jmp.reviewservice.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
@@ -74,13 +82,13 @@ public class Review {
 
     public Long getLikeCount() {
         return votes.stream()
-            .filter(v -> v.getVoteType() == VoteType.LIKE)
-            .count();
+                .filter(v -> v.getVoteType() == VoteType.LIKE)
+                .count();
     }
 
     public Long getDislikeCount() {
         return votes.stream()
-            .filter(v -> v.getVoteType() == VoteType.DISLIKE)
-            .count();
+                .filter(v -> v.getVoteType() == VoteType.DISLIKE)
+                .count();
     }
 }

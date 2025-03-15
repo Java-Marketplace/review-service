@@ -2,8 +2,8 @@ package com.jmp.reviewservice.integration.controller.review;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.database.rider.core.api.dataset.DataSet;
-import com.jmp.reviewservice.dto.review.CreateReviewRequest;
-import com.jmp.reviewservice.dto.review.UpdateReviewRequest;
+import com.jmp.reviewservice.dto.request.CreateReviewRequest;
+import com.jmp.reviewservice.dto.request.UpdateReviewRequest;
 import com.jmp.reviewservice.model.Review;
 import com.jmp.reviewservice.repository.ReviewRepository;
 import com.jmp.reviewservice.support.BaseIntegrationTest;
@@ -35,6 +35,7 @@ class ReviewControllerImplTest extends BaseIntegrationTest {
 
     @Test
     @DataSet("dataset/reviews.yaml")
+    @Transactional
     void getAllReviewsByProductId_Success() throws Exception {
         mockMvc.perform(get("/api/v1/reviews/" + PRODUCT_ID)
                         .contentType(MediaType.APPLICATION_JSON))
@@ -45,6 +46,7 @@ class ReviewControllerImplTest extends BaseIntegrationTest {
     }
 
     @Test
+    @Transactional
     void getAllReviewsByProductId_NotFound() throws Exception {
         mockMvc.perform(get("/api/v1/reviews/" + PRODUCT_ID)
                         .contentType(MediaType.APPLICATION_JSON))
@@ -68,6 +70,19 @@ class ReviewControllerImplTest extends BaseIntegrationTest {
     }
 
     @Test
+    @Transactional
+    void createReview_BadRequest() throws Exception {
+        CreateReviewRequest request = new CreateReviewRequest(PRODUCT_ID, 6, "Advantage", "Disadvantage", null);
+
+        String jsonBody = objectMapper.writeValueAsString(request);
+
+        mockMvc.perform(post("/api/v1/reviews")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonBody))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
     @DataSet("dataset/reviews.yaml")
     @Transactional
     void updateReview_Success() throws Exception {
@@ -83,6 +98,32 @@ class ReviewControllerImplTest extends BaseIntegrationTest {
     }
 
     @Test
+    @Transactional
+    void updateReview_NotFound() throws Exception {
+        UpdateReviewRequest request = new UpdateReviewRequest(4, null, null, null);
+
+        String jsonBody = objectMapper.writeValueAsString(request);
+
+        mockMvc.perform(put("/api/v1/reviews/" + PRODUCT_ID)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonBody))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @Transactional
+    void updateReview_BadRequest() throws Exception {
+        UpdateReviewRequest request = new UpdateReviewRequest(6, null, null, null);
+
+        String jsonBody = objectMapper.writeValueAsString(request);
+
+        mockMvc.perform(put("/api/v1/reviews/" + PRODUCT_ID)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonBody))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
     @DataSet("dataset/reviews.yaml")
     @Transactional
     void deleteReviewById_Success() throws Exception {
@@ -91,5 +132,12 @@ class ReviewControllerImplTest extends BaseIntegrationTest {
 
         Review review = reviewRepository.findById(PRODUCT_ID).orElse(null);
         assertNull(review);
+    }
+
+    @Test
+    @Transactional
+    void deleteReviewById_NotFound() throws Exception {
+        mockMvc.perform(delete("/api/v1/reviews/" + PRODUCT_ID))
+                .andExpect(status().isNotFound());
     }
 }

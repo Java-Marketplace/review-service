@@ -1,8 +1,8 @@
 package com.jmp.reviewservice.service.review;
 
-import com.jmp.reviewservice.dto.review.CreateReviewRequest;
-import com.jmp.reviewservice.dto.review.ReviewResponse;
-import com.jmp.reviewservice.dto.review.UpdateReviewRequest;
+import com.jmp.reviewservice.dto.request.CreateReviewRequest;
+import com.jmp.reviewservice.dto.response.ReviewResponse;
+import com.jmp.reviewservice.dto.request.UpdateReviewRequest;
 import com.jmp.reviewservice.exception.ProductNotFoundException;
 import com.jmp.reviewservice.exception.ReviewNotFoundException;
 import com.jmp.reviewservice.mapper.ReviewMapper;
@@ -24,9 +24,8 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public List<ReviewResponse> getAllReviewsByProduct(Long productId) {
         List<Review> reviewsByProductId = reviewRepository.findAllByProductId(productId);
-        if (reviewsByProductId.isEmpty()) {
+        if (reviewsByProductId.isEmpty())
             throw new ProductNotFoundException(productId);
-        }
         return reviewMapper.toResponseList(reviewsByProductId);
     }
 
