@@ -1,8 +1,8 @@
 package com.jmp.reviewservice.service.review;
 
 import com.jmp.reviewservice.dto.request.CreateReviewRequest;
-import com.jmp.reviewservice.dto.response.ReviewResponse;
 import com.jmp.reviewservice.dto.request.UpdateReviewRequest;
+import com.jmp.reviewservice.dto.response.ReviewResponse;
 import com.jmp.reviewservice.exception.ProductNotFoundException;
 import com.jmp.reviewservice.exception.ReviewNotFoundException;
 import com.jmp.reviewservice.mapper.ReviewMapper;
