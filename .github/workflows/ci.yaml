@@ -13,6 +13,10 @@ jobs:
   build-and-test:
     runs-on: ubuntu-22.04
 
+    permissions:
+      contents: read
+      packages: write
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -48,7 +52,7 @@ jobs:
         run: ./gradlew jacocoTestReport --no-daemon
 
       - name: Build Docker Image with Jib
-        run: ./gradlew jib --no-daemon -PGITHUB_USERNAME=${{ secrets.GITHUB_USERNAME }} -PGITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+        run: ./gradlew --no-daemon -PGITHUB_USERNAME=${{ github.actor }} -PGITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload Build Artifact
         if: always()
