@@ -22,9 +22,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -58,16 +56,12 @@ public class Review {
     private String disadvantage;
 
     @Column(length = 2000)
-    @Size(min = 5, max = 2000, message = "Хуйня переделывай")
+    @Size(min = 5, max = 2000)
     private String comment;
 
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("reviewMessages")
     private List<ReviewMessage> answers = new ArrayList<>();
-
-    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference("reviewVotes")
-    private Set<ReviewVote> votes = new HashSet<>();
 
     @Formula("(SELECT COUNT(*) FROM review_vote rv WHERE rv.review_id = id AND rv.vote_type = 'LIKE')")
     private Long likeCount;
