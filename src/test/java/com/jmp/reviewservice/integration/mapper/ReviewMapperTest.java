@@ -41,8 +41,8 @@ class ReviewMapperTest extends BaseIntegrationTest {
         assertEquals("Хорошее качество", review.getAdvantage());
         assertEquals("Высокая цена", review.getDisadvantage());
         assertEquals("Отличный продукт, но дороговат.", review.getComment());
-        assertEquals(0, review.getLikeCount());
-        assertEquals(0, review.getDislikeCount());
+        assertNull(review.getLikeCount());
+        assertNull(review.getDislikeCount());
         assertNotNull(review.getAnswers());
         assertTrue(review.getAnswers().isEmpty());
         assertNotNull(review.getVotes());

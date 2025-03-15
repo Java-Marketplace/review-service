@@ -9,7 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
@@ -18,6 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
@@ -69,10 +69,10 @@ public class Review {
     @JsonManagedReference
     private Set<ReviewVote> votes = new HashSet<>();
 
-    @Transient
+    @Formula("(SELECT COUNT(*) FROM review_vote rv WHERE rv.review_id = id AND rv.vote_type = 'LIKE')")
     private Long likeCount;
 
-    @Transient
+    @Formula("(SELECT COUNT(*) FROM review_vote rv WHERE rv.review_id = id AND rv.vote_type = 'DISLIKE')")
     private Long dislikeCount;
 
     @CreationTimestamp
@@ -82,16 +82,4 @@ public class Review {
     @UpdateTimestamp
     @Column(nullable = false)
     private LocalDateTime updatedAt;
-
-    public Long getLikeCount() {
-        return votes.stream()
-                .filter(v -> v.getVoteType() == VoteType.LIKE)
-                .count();
-    }
-
-    public Long getDislikeCount() {
-        return votes.stream()
-                .filter(v -> v.getVoteType() == VoteType.DISLIKE)
-                .count();
-    }
 }
