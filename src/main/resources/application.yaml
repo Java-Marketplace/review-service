@@ -19,3 +19,6 @@ spring:
         show_sql: true
     hibernate:
       ddl-auto: none
+
+  liquibase:
+    enabled: false

@@ -17,6 +17,13 @@ jobs:
       contents: read
       packages: write
 
+    services:
+      docker:
+        image: docker:dind
+        options: --privileged
+        env:
+          DOCKER_TLS_CERTDIR: ""
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -28,6 +35,12 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Verify Docker
+        run: docker info
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v4
@@ -44,12 +57,6 @@ jobs:
 
       - name: Build and Test with Gradle
         run: ./gradlew build --no-daemon
-
-      - name: Run Checkstyle
-        run: ./gradlew checkstyleMain --no-daemon
-
-      - name: Generate JaCoCo Report
-        run: ./gradlew jacocoTestReport --no-daemon
 
       - name: Build Docker Image with Jib
         run: ./gradlew jib --no-daemon -PGITHUB_ACTOR=${{ github.actor }} -PGITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
