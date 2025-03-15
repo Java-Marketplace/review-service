@@ -3,6 +3,7 @@ package com.jmp.reviewservice.service.review;
 import com.jmp.reviewservice.dto.review.CreateReviewRequest;
 import com.jmp.reviewservice.dto.review.ReviewResponse;
 import com.jmp.reviewservice.dto.review.UpdateReviewRequest;
+import com.jmp.reviewservice.exception.ProductNotFoundException;
 import com.jmp.reviewservice.exception.ReviewNotFoundException;
 import com.jmp.reviewservice.mapper.ReviewMapper;
 import com.jmp.reviewservice.model.Review;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +23,11 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public List<ReviewResponse> getAllReviewsByProduct(Long productId) {
-        return reviewMapper.toResponseList(reviewRepository.findAllByProductId(productId));
+        List<Review> reviewsByProductId = reviewRepository.findAllByProductId(productId);
+        if (reviewsByProductId.isEmpty()) {
+            throw new ProductNotFoundException(productId);
+        }
+        return reviewMapper.toResponseList(reviewsByProductId);
     }
 
     @Override
@@ -32,7 +38,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     @Transactional
-    public ReviewResponse createReview(Long userId, CreateReviewRequest createReviewRequest) {
+    public ReviewResponse createReview(UUID userId, CreateReviewRequest createReviewRequest) {
         Review review = reviewMapper.toEntity(createReviewRequest);
         review.setUserId(userId);
         reviewRepository.save(review);

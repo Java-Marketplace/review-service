@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,7 +33,7 @@ public class Review {
     private Long productId;
 
     @Column(nullable = false)
-    private Long userId;
+    private UUID userId;
 
     @Min(1)
     @Max(5)

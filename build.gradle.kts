@@ -47,7 +47,6 @@ dependencies {
     annotationProcessor("org.mapstruct:mapstruct-processor:${property("mapstruct.version")}")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.testcontainers:junit-jupiter")
-    testImplementation("org.springframework.boot:spring-boot-testcontainers")
     testImplementation("org.testcontainers:postgresql")
     testImplementation("com.github.database-rider:rider-spring:${property("database-rider.version")}")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")

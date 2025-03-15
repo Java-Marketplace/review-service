@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 1740952099759-1
+      id: 1741973756003-1
       author: aqua (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -23,7 +23,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                   name: user_id
-                  type: BIGINT
+                  type: UUID
               - column:
                   constraints:
                     nullable: false
@@ -50,7 +50,7 @@ databaseChangeLog:
                   type: DATETIME
             tableName: review
   - changeSet:
-      id: 1740952099759-2
+      id: 1741973756003-2
       author: aqua (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -66,7 +66,7 @@ databaseChangeLog:
                   type: BIGINT
               - column:
                   name: user_id
-                  type: BIGINT
+                  type: UUID
               - column:
                   constraints:
                     nullable: false
@@ -87,7 +87,7 @@ databaseChangeLog:
                   type: DATETIME
             tableName: review_message
   - changeSet:
-      id: 1740952099759-3
+      id: 1741973756003-3
       author: aqua (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -103,7 +103,7 @@ databaseChangeLog:
                   type: BIGINT
               - column:
                   name: user_id
-                  type: BIGINT
+                  type: UUID
               - column:
                   constraints:
                     nullable: false
@@ -119,7 +119,7 @@ databaseChangeLog:
                   type: DATETIME
             tableName: review_vote
   - changeSet:
-      id: 1740952099759-4
+      id: 1741973756003-4
       author: aqua (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -130,7 +130,7 @@ databaseChangeLog:
             referencedColumnNames: id
             referencedTableName: review
   - changeSet:
-      id: 1740952099759-5
+      id: 1741973756003-5
       author: aqua (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:

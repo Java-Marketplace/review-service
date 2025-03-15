@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Validated
 @RestController
@@ -30,7 +31,7 @@ public class ReviewControllerImpl implements ReviewController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ReviewResponse createReview(@RequestBody @Valid CreateReviewRequest createReviewRequest) {
-        return reviewService.createReview(1L, createReviewRequest);
+        return reviewService.createReview(UUID.randomUUID(), createReviewRequest);
     }
 
     @Override

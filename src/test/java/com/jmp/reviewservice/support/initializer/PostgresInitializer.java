@@ -1,4 +1,4 @@
-package initializer;
+package com.jmp.reviewservice.support.initializer;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.context.ApplicationContextInitializer;
