@@ -16,7 +16,6 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 class ReviewMapperTest extends BaseIntegrationTest {
@@ -43,8 +42,6 @@ class ReviewMapperTest extends BaseIntegrationTest {
         assertEquals("Отличный продукт, но дороговат.", review.getComment());
         assertNull(review.getLikeCount());
         assertNull(review.getDislikeCount());
-        assertNotNull(review.getAnswers());
-        assertTrue(review.getAnswers().isEmpty());
         assertNull(review.getCreatedAt());
         assertNull(review.getUpdatedAt());
     }

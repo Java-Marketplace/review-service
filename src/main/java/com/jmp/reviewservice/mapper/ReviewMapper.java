@@ -1,8 +1,8 @@
 package com.jmp.reviewservice.mapper;
 
 import com.jmp.reviewservice.dto.request.CreateReviewRequest;
-import com.jmp.reviewservice.dto.response.ReviewResponse;
 import com.jmp.reviewservice.dto.request.UpdateReviewRequest;
+import com.jmp.reviewservice.dto.response.ReviewResponse;
 import com.jmp.reviewservice.model.Review;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -15,7 +15,6 @@ import java.util.List;
 public interface ReviewMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "userId", ignore = true)
-    @Mapping(target = "answers", ignore = true)
     @Mapping(target = "likeCount", ignore = true)
     @Mapping(target = "dislikeCount", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
@@ -31,7 +30,6 @@ public interface ReviewMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "userId", ignore = true)
     @Mapping(target = "productId", ignore = true)
-    @Mapping(target = "answers", ignore = true)
     @Mapping(target = "likeCount", ignore = true)
     @Mapping(target = "dislikeCount", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
