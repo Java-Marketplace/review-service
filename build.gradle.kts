@@ -93,8 +93,8 @@ jib {
     to {
         image = "ghcr.io/java-marketplace/review-service"
         auth {
-            username = System.getenv("GITHUB_ACTOR") ?: ""
-            password = System.getenv("GITHUB_TOKEN") ?: ""
+            username = (project.findProperty("GITHUB_ACTOR") ?: "").toString()
+            password = (project.findProperty("GITHUB_TOKEN") ?: "").toString()
         }
     }
 }
