@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ReviewServiceApplication {
+public class ReviewMicroserviceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ReviewServiceApplication.class, args);
+        SpringApplication.run(ReviewMicroserviceApplication.class, args);
     }
 }
