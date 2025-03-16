@@ -22,3 +22,6 @@ spring:
 
   liquibase:
     drop-first: true
+
+server:
+  address: 0.0.0.0
