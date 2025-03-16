@@ -105,5 +105,5 @@ tasks.register<Test>("integrationTest") {
 }
 
 tasks.named("build") {
-    dependsOn("checkstyleMain", "jacocoTestReport")
+    dependsOn("checkstyleMain")
 }
