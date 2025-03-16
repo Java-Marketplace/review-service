@@ -86,6 +86,22 @@ tasks.jacocoTestReport {
 
 tasks.test {
     finalizedBy(tasks.jacocoTestReport)
+    useJUnitPlatform {
+        includeTags("unit")
+    }
+}
+
+val integrationTest by tasks.registering(Test::class) {
+    group = "verification"
+    description = "Runs integration tests"
+    useJUnitPlatform {
+        includeTags("integration")
+    }
+    mustRunAfter(tasks.test)
+}
+
+tasks.check {
+    dependsOn(tasks.test, integrationTest)
 }
 
 tasks.named("build") {

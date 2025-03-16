@@ -14,9 +14,7 @@ public interface ErrorResponseMapper {
     @Mapping(target = "code", expression = "java(ex.getCode())")
     @Mapping(target = "message", expression = "java(ex.getMessage())")
     @Mapping(target = "timestamp", expression = "java(java.time.Instant.now())")
-    ErrorResponse toErrorResponse(
-            CustomException ex
-    );
+    ErrorResponse toErrorResponse(CustomException ex);
 
     default HttpStatus getStatusValue(CustomException ex) {
         ResponseStatus responseStatus = AnnotationUtils.findAnnotation(ex.getClass(), ResponseStatus.class);

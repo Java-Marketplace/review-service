@@ -3,6 +3,7 @@ package com.jmp.reviewservice.exception.handler;
 import com.jmp.reviewservice.dto.exception.ErrorResponse;
 import com.jmp.reviewservice.exception.CustomException;
 import com.jmp.reviewservice.mapper.ErrorResponseMapper;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.Instant;
@@ -28,34 +30,32 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException ex) {
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleValidationException(MethodArgumentNotValidException ex, HttpServletResponse response) {
         String errorMessage = ex.getBindingResult().getFieldErrors().stream()
                 .map(FieldError::getDefaultMessage)
                 .filter(Objects::nonNull)
                 .findFirst()
-                .orElse("Некорректные данные в запросе");
+                .orElse("Incorrect data in the request");
 
-        ErrorResponse errorResponse = new ErrorResponse(
-                HttpStatus.BAD_REQUEST,
+        return new ErrorResponse(
+                HttpStatus.valueOf(response.getStatus()),
                 "VALIDATION_ERROR",
                 errorMessage,
                 Instant.now()
         );
-
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleInternalException(Exception ex) {
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorResponse handleInternalException(Exception ex, HttpServletResponse response) {
         log.error("Internal server error", ex);
 
-        ErrorResponse errorResponse = new ErrorResponse(
-                HttpStatus.INTERNAL_SERVER_ERROR,
+        return new ErrorResponse(
+                HttpStatus.valueOf(response.getStatus()),
                 "INTERNAL_ERROR",
-                "Внутренняя ошибка сервера",
+                "Internal Server Error",
                 Instant.now()
         );
-
-        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
